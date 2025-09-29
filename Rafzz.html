@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RafzzTzy | RAFZZ INVISIBLE</title>
+  <link rel="icon" href="https://files.catbox.moe/cz28aa.jpeg" type="image/jpg">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/jnicol/particleground/jquery.particleground.min.js"></script>
+  
+  <style>
+    /* =================================
+       COLOR VARIABLES (Gabungan)
+       ================================= */
+    :root {
+      /* Overload-X Colors (Dipertahankan) */
+      --ox-primary: #8a2be2; /* Blue Violet */
+      --ox-secondary: #b88aff; /* Light Purple */
+      --ox-text: #d6b3ff; /* Pale Purple */
+
+      /* CROW INVISIBLE Login Colors */
+      --login-muted:#9aa4c7;
+      --login-text:#e8ecff;
+      --login-primary:#9b5cff; 
+      --login-secondary:#00d4ff; 
+      --login-accent:#6dd6ff;
+
+      /* CROW INVISIBLE Panel Colors */
+      --ci-primary: #9932cc; /* Dark Orchid */
+      --ci-secondary: #8a2be2; /* Blue Violet */
+      --ci-text: #b19cd9; /* Light Slate Blue */
+    }
+
+    /* =================================
+       GLOBAL & BODY (DASHBOARD ASLI)
+       ================================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: black;
+      font-family: 'Poppins', sans-serif;
+      color: #b19cd9;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto; 
+    }
+    
+    body.modal-open { overflow: hidden; } /* Mencegah scroll saat modal aktif */
+
+    #particles {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    /* =================================
+       HEADER & DASHBOARD (Dipertahankan)
+       ================================= */
+    header {
+      position: sticky; 
+      top: 0;
+      z-index: 50; 
+      padding: 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.9); 
+      border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      width: 80px;
+      filter: drop-shadow(0 0 10px #8a2be2);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .nav-link {
+      color: #b88aff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      cursor: pointer; 
+    }
+
+    .nav-link:hover {
+      background: rgba(138, 43, 226, 0.2);
+      text-shadow: 0 0 10px #b88aff;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    
+    #overload-x-main {
+        display: block; /* Default view */
+    }
+    
+    /* Tombol dan Seksion Lainnya */
+    .section {
+      background: rgba(138, 43, 226, 0.05);
+      border: 1px solid rgba(138, 43, 226, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.3);
+    }
+    
+    .section-title {
+      font-size: 28px;
+      color: #b88aff;
+      text-shadow: 0 0 10px #b88aff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      color: #b88aff;
+      text-shadow: 0 0 10px #b88aff;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: #d6b3ff;
+      margin-bottom: 25px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .plans-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .plan-card {
+      background: rgba(35, 0, 60, 0.3);
+      border: 1px solid rgba(138, 43, 226, 0.3);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+    }
+    
+    .plan-name {
+      font-size: 22px;
+      color: #b88aff;
+      margin-bottom: 15px;
+    }
+
+    .plan-price {
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .plan-price span {
+      font-size: 16px;
+      color: #d6b3ff;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .plan-features li {
+      position: relative;
+      padding-left: 40px; 
+      margin-bottom: 12px;
+      line-height: 1.6; 
+      list-style: none;
+    }
+
+    .plan-features li i {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%); 
+      color: #b88aff;
+      font-size: 18px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #8a2be2, #4b0082);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(138, 43, 226, 0.3);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn:hover {
+      background: #9932cc;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(138, 43, 226, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #8a2be2;
+      color: #b88aff;
+    }
+
+    .btn-outline:hover {
+      background: rgba(138, 43, 226, 0.1);
+    }
+    
+    .about-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .about-text {
+      line-height: 1.6;
+    }
+
+    .about-features {
+      list-style: none;
+    }
+
+    .about-features li {
+      margin: 15px 0;
+      padding-left: 42px; 
+      position: relative;
+    }
+
+    .about-features li i {
+      color: #b88aff;
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 15px;
+    }
+    
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(138, 43, 226, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b88aff;
+      font-size: 18px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      color: #d6b3ff;
+    }
+
+    .form-control {
+      background: rgba(138, 43, 226, 0.1);
+      border: 1px solid rgba(138, 43, 226, 0.3);
+      border-radius: 8px;
+      padding: 12px 15px;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #8a2be2;
+      box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border-top: 1px solid rgba(138, 43, 226, 0.2);
+      margin-top: 50px;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: #8a2be2;
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      background: rgba(70, 0, 120, 0.9);
+      border: 1px solid #8a2be2;
+      color: white;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: translateX(100vw);
+      transition: transform 0.3s ease;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    /* Fix untuk ikon FontAwesome */
+    .feature-icon {
+      font-size: 1.2em;
+      margin-right: 8px;
+      color: #b88aff;
+      width: 24px;
+      text-align: center;
+    }
+
+    /* =================================
+       LOGIN MODAL/OVERLAY (CROW INVISIBLE)
+       ================================= */
+    .login-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .login-overlay.active { opacity: 1; visibility: visible; }
+    .login-card { background: rgba(255,255,255,.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 22px 20px; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 0 20px rgba(155,92,255,.3); transform: scale(0.8); transition: transform 0.3s ease; }
+    .login-overlay.active .login-card { transform: scale(1); }
+    .login-logo { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 14px; box-shadow:0 0 16px var(--login-primary), 0 0 30px rgba(0,212,255,.4); object-fit:cover; }
+    .login-title { font-size:22px; font-family:'Orbitron', sans-serif; font-weight:800; color: var(--login-primary); margin-bottom:4px; text-shadow:0 0 10px rgba(155,92,255,.7); }
+    .login-subtitle { font-size:12px; color: var(--login-muted); margin-bottom:20px; }
+    .login-form-group { position:relative; margin-bottom:14px; }
+    .login-form-group i { position:absolute;left:12px;top:50%; transform:translateY(-50%); color:var(--login-secondary); font-size:13px; }
+    .login-input { width:100%; padding:12px 12px 12px 36px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background:rgba(7,10,20,.6); color:var(--login-text); font-size:13px; outline:none; transition: all .3s; }
+    .login-button { width:100%; padding:12px; font-size:14px; font-weight:600; border:none; border-radius:10px; cursor:pointer; background:linear-gradient(90deg, var(--login-primary), var(--login-secondary)); color:white; transition: all .3s ease; box-shadow:0 0 10px rgba(155,92,255,.4); }
+    .buy-access { margin-top:14px; display:inline-block; font-size:12px; padding:8px 16px; border-radius:10px; font-weight:500; background:linear-gradient(90deg,var(--login-secondary),var(--login-accent)); color:white; text-decoration:none; box-shadow:0 0 12px rgba(0,212,255,.4); font-family:Poppins, sans-serif; transition: all .25s; }
+    .login-footer { margin-top:20px; font-size:10px; color:var(--login-muted); }
+
+    /* =================================
+       CROW INVISIBLE PANEL STYLES
+       ================================= */
+    #crow-invisible-panel {
+        display: none; 
+        min-height: calc(100vh - 40px);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        width: 100%;
+        position: relative;
+        z-index: 2; 
+    }
+    .container-custom { background: rgba(0, 0, 0, 0.7); border: 1px solid var(--ci-primary); padding: 24px; border-radius: 20px; width: 100%; max-width: 420px; box-shadow: 0 0 16px rgba(153, 50, 204, 0.8); backdrop-filter: blur(10px); position: relative; z-index: 1; margin: auto; }
+    .panel-user-info { font-family: 'Orbitron', sans-serif; font-size: 22px; color: var(--ci-text); font-weight: bold; text-align: center; margin-bottom: 6px; }
+    .connected { font-size: 14px; color: var(--ci-secondary); margin-bottom: 16px; display: flex; justify-content: center; align-items: center; font-family: 'Poppins', sans-serif; text-transform: uppercase; font-weight: 600; }
+    .connected::before { content: ''; width: 10px; height: 10px; background: #25ff08; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px rgba(37, 255, 8, 0.8); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 255, 8, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(37, 255, 8, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 255, 8, 0); } }
+    .input-target { width: 100%; padding: 14px; border-radius: 10px; background: #1a001a; border: 1px solid rgba(153, 50, 204, 0.5); color: var(--ci-text); margin-bottom: 16px; outline: none; transition: border-color 0.2s; }
+    .buttons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 20px; }
+    .mode-btn { font-size: 14px; font-weight: 600; padding: 12px 16px; background-color: #1a001a; color: var(--ci-text); border: 2px solid var(--ci-secondary); border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; text-transform: uppercase; }
+    .mode-btn.selected { background: var(--ci-secondary); color: white; box-shadow: 0 0 10px rgba(138, 43, 226, 0.7); }
+    .execute-button { background: var(--ci-secondary); color: #fff; padding: 14px; width: 100%; border-radius: 10px; font-weight: bold; border: none; margin-top: 20px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 16px; }
+    .execute-button:disabled { background: #4b0082; cursor: not-allowed; opacity: 0.6; }
+    .footer-action-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin-top: 20px; border-top: 1px dashed rgba(138, 43, 226, 0.3); padding-top: 15px; }
+    .footer-button { background: rgba(138, 43, 226, 0.15); border: 1px solid var(--ci-secondary); border-radius: 8px; padding: 8px 12px; font-size: 12px; color: var(--ci-text); display: flex; align-items: center; gap: 6px; transition: all 0.3s ease; }
+    .footer-button a { color: var(--ci-text); text-decoration: none; }
+
+    /* =================================
+       TOAST NOTIFICATION (Gabungan)
+       ================================= */
+    .toast-popup {
+      position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
+      background: var(--login-primary); color:white;
+      padding:10px 16px; border-radius:8px;
+      font-size:12px; font-weight:500;
+      box-shadow:0 0 12px rgba(155,92,255,.5);
+      opacity:0;
+      animation: fadeInOut 3.8s ease forwards;
+      z-index:10000;
+    }
+    #panel-toast {
+        position:fixed; top:20px; left:100%; 
+        max-width: 90%;
+        background:#5a0092; 
+        color:white;
+        padding:14px 24px;
+        border:1px solid #8a2be2; 
+        border-radius:10px;
+        font-family:'Poppins', sans-serif;
+        font-size:15px; 
+        font-weight:500;
+        line-height:1.6;
+        text-align: left;
+        white-space: pre-line;
+        box-shadow:0 0 20px rgba(0,0,0,0.4);
+        z-index:9999;
+        transition: left 0.6s ease-out;
+        display: none;
+    }
+    @keyframes fadeInOut {
+      0%{opacity:0; transform:translate(-50%,20px);}
+      10%{opacity:1; transform:translate(-50%,0);}
+      90%{opacity:1;}
+      100%{opacity:0; transform:translate(-50%,20px);}
+    }
+  </style>
+</head>
+<body>
+  <div id="particles"></div>
+  
+  <div id="notification" class="notification">
+    <i class="fas fa-check-circle"></i> Pesan Anda telah terkirim! Kami akan membalas secepatnya.
+  </div>
+
+  <header id="ox-header">
+    <div class="logo-container">
+      <img src="https://files.catbox.moe/cz28aa.jpeg" alt="Logo" class="logo">
+    </div>
+    <h1 class="hero-title">RafzzTzy Bug</h1>
+    <div class="nav-container">
+      <a href="#plans" class="nav-link">Plans</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#" id="open-login" class="nav-link">Login</a> 
+    </div>
+  </header>
+
+  <div id="overload-x-main">
+    <main>
+      <section class="section hero">
+        <div class="hero-subtitle">Welcome to RafzzTzy Bug - Advanced System API Bug.</div>
+        <a href="#plans" class="btn">
+          <i class="fas fa-crown"></i> View Membership Plans
+        </a>
+      </section>
+
+      <section id="plans" class="section">
+        <h2 class="section-title">Membership Plans</h2>
+        <div class="plans-container">
+          <div class="plan-card">
+            <h3 class="plan-name">Basic User</h3>
+            <div class="plan-price">Rp 25.000 <span>/Lifetime</span></div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check feature-icon"></i> Limited Requests Day</li>
+              <li><i class="fas fa-check feature-icon"></i> Standard Support</li>
+              <li><i class="fas fa-check feature-icon"></i> Web Panel Access</li>
+            </ul>
+            <a href="https://t.me/SyallOfficial?text=Mas%20Mau%20Buy%20Basic%20User" class="btn btn-outline">Select Plan</a>
+          </div>
+
+          <div class="plan-card">
+            <h3 class="plan-name">Reseller User</h3>
+            <div class="plan-price">Rp 60.000 <span>/Lifetime</span></div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check feature-icon"></i> Increased Request Limits</li>
+              <li><i class="fas fa-check feature-icon"></i> Priority Support</li>
+              <li><i class="fas fa-check feature-icon"></i> Web Panel Access</li>
+              <li><i class="fas fa-check feature-icon"></i> Create Basic User</li>
+            </ul>
+            <a href="https://t.me/SyallOfficial?text=Mas%20Mau%20Buy%20Reseller%20User" class="btn btn-outline">Select Plan</a>
+          </div>
+
+          <div class="plan-card">
+            <h3 class="plan-name">Admin User</h3>
+            <div class="plan-price">Rp 100.000 <span>/Lifetime</span></div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check feature-icon"></i> Unlimited Request Limits</li>
+              <li><i class="fas fa-check feature-icon"></i> 24/7 Priority Support</li>
+              <li><i class="fas fa-check feature-icon"></i> Web Panel Access</li>
+              <li><i class="fas fa-check feature-icon"></i> Role Management System</li>
+            </ul>
+            <a href="https://t.me/SyallOfficial?text=Mas%20Buy%20Admin%20User" class="btn btn-outline">Select Plan</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <h2 class="section-title">About Overload-X</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>Overload-X is a sophisticated website for managing and exploring bugs in API systems. Built with the latest technology.</p>
+            <p>Our website is designed for users of Exploit to WhatsApp Application.</p>
+          </div>
+          <div>
+            <ul class="about-features">
+              <li><i class="fas fa-bug"></i> Advanced Bug Detection Algorithms</li>
+              <li><i class="fas fa-shield-alt"></i> Real-time Vulnerability Scanning</li>
+              <li><i class="fas fa-bolt"></i> High-performance API</li>
+              <li><i class="fas fa-code"></i> Support for Multiple Programming Languages</li>
+              <li><i class="fas fa-mobile-alt"></i> Responsive Design for all Devices</li>
+              <li><i class="fas fa-cloud"></i> Cloud-based Infrastructure</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h2 class="section-title">Contact Owner</h2>
+        <div class="contact-container">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fab fa-telegram"></i>
+              </div>
+              <div>
+                <h3>Telegram</h3>
+                <p>@SyallOfficial</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h3>Email</h3>
+                <p>irsyalfaiz97@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <h3>Response Time</h3>
+                <p>Within 24 hours</p>
+              </div>
+            </div>
+          </div>
+          
+          <form class="contact-form" action="https://submit-form.com/L1CukDuye">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" class="form-control" placeholder="Type your message here" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p class="footer-text">© 2025 Overload-X. All rights reserved.</p>
+    </footer>
+  </div> <div id="rafzz-invisible-panel">
+    <div class="container-custom"> 
+      <div class="icon" style="text-align: center; margin-bottom: 15px;">
+        <img src="https://files.catbox.moe/cz28aa.jpeg" class="logo" alt="CROW INVISIBLELogo">
+      </div>
+      <div class="panel-user-info" id="panel-username-display">Welcome, Loading...</div>
+      <div class="connected">CONNECTED</div>
+
+      <input type="text" id="targetInput" class="input-target" placeholder="Please input target number. example : 628xxxx" />
+      
+      <div class="buttons-grid">
+        <button class="mode-btn" data-mode="androdelay2"><i class="fa fa-spinner"></i> RAFZZ INVISIBLE KILL YOU</button>
+        <button class="mode-btn" data-mode="androdelay"><i class="fa fa-spinner"></i> RAFZZ INVISIBLE ATTACK</button>
+        <button class="mode-btn full" data-mode="iosfc"><i class="fa fa-bolt"></i> RAFZZ INVISIBLE IOS</button>
+        <button class="mode-btn full" data-mode="delay"><i class="fa fa-bolt"></i> RAFZZ INVISIBLE DELAY</button>
+      </div>
+
+      <button class="execute-button" id="executeBtn" disabled><i class="fas fa-rocket"></i> EXECUTE</button>
+
+      <div class="footer-action-container">
+        <div class="footer-button" id="manage-user-btn"><a href="/userlist"><i class="fas fa-users-cog"></i> Manage User</a></div>
+        
+        <div class="footer-button"><a href="https://t.me/SyallOfficial" target="_blank"><i class="fab fa-telegram"></i> Developer</a></div>
+        <div class="footer-button"><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></div>
+        <div class="footer-button"><i class="fas fa-user"></i> <span id="panel-role-display"></span> &nbsp;|&nbsp; <i class="fas fa-hourglass-half"></i> <span id="panel-time-display"></span></div>
+      </div>
+    </div>
+    
+  </div> <div id="login-overlay" class="login-overlay">
+    <div class="login-card">
+      <img src="https://files.catbox.moe/cz28aa.jpeg" alt="Logo" class="login-logo" />
+      <div class="icon"><i class="fas fa-skull-crossbones" style="color: var(--login-primary);"></i></div>
+      <div class="login-title">RAFZZ INVISIBLE</div>
+      <div class="login-subtitle">RAFZZ INVISIBLE NEW SEND BUG</div>
+
+      <form id="login-form" method="POST" action="#">
+        <div class="login-form-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="login-username" name="username" placeholder="Username" class="login-input" required />
+        </div>
+        <div class="login-form-group">
+          <i class="fas fa-key"></i>
+          <input type="password" id="login-key" name="key" placeholder="Password" class="login-input" required />
+        </div>
+        <button type="submit" class="login-button">
+          <i class="fa-solid fa-right-to-bracket"></i> LOGIN
+        </button>
+      </form>
+
+      <a class="buy-access" href="https://t.me/rafzztzy" target="_blank">
+        <i class="fas fa-coins"></i> Buy Key Access
+      </a>
+
+      <div class="login-footer">© 2025 Rafzz</div>
+    </div>
+  </div>
+  
+  <div id="toast" class="toast-popup"></div>
+  <div id="panel-toast" style="display:none;"></div>
+
+
+  <script>
+    // Data Simulasi Pengguna
+    const USER_DATA = {
+        username: "Syall_Admin",
+        role: "admin", 
+        formattedTime: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }) + " WIB"
+    };
+
+    $(document).ready(function() {
+      // Inisialisasi Partikel
+      $('#particles').particleground({
+        dotColor: '#b19cd9',
+        lineColor: '#8a2be2',
+        minSpeedX: 0.1, maxSpeedX: 0.3,
+        minSpeedY: 0.1, maxSpeedY: 0.3,
+        density: 10000,
+        particleRadius: 3,
+      });
+
+      const loginOverlay = $('#login-overlay');
+      const toast = document.getElementById("toast");
+      const panelToast = document.getElementById("panel-toast");
+
+      // --- 1. OVERLOAD-X DASHBOARD LOGIC (Scroll & Contact) ---
+
+      // Smooth scrolling untuk link menu
+      $('a[href^="#"]').on('click', function (e) {
+        if ($(this).attr('id') === 'open-login') { return; }
+        e.preventDefault();
+        $('html, body').animate({
+          scrollTop: $($(this).attr('href')).offset().top
+        }, 500);
+      });
+      
+      // Contact Form (Tampilkan notifikasi lokal)
+      $('.contact-form').on('submit', function(e) {
+        // Tampilkan notifikasi asli dashboard
+        $('#notification').addClass('show');
+        setTimeout(function () {
+          $('#notification').removeClass('show');
+        }, 5000);
+        
+        // Catatan: Jika Anda ingin mencegah form submission ke Formspark
+        // dan hanya menggunakan simulasi notifikasi, uncomment baris ini:
+        // e.preventDefault(); 
+      });
+      
+      // --- 2. LOGIN MODAL LOGIC ---
+
+      // Tampilkan Modal saat tombol Login diklik
+      $('#open-login').on('click', function(e) {
+        e.preventDefault();
+        loginOverlay.addClass('active');
+        $('body').addClass('modal-open'); 
+      });
+
+      // Sembunyikan Modal saat klik di luar (overlay)
+      loginOverlay.on('click', function(e) {
+        if (e.target === this) {
+          loginOverlay.removeClass('active');
+          $('body').removeClass('modal-open'); 
+        }
+      });
+      
+      // --- 3. PROSES LOGIN & PENGALIHAN ---
+      
+      $('#login-form').on('submit', function(e) {
+        e.preventDefault();
+
+        const username = $('#login-username').val();
+        const key = $('#login-key').val();
+        
+        // KODE LOGIN VALIDASI SIMULASI
+        const validUsername = "admin";
+        const validKey = "123456"; 
+
+        if (username === validUsername && key === validKey) {
+          
+          // Tampilkan pesan sukses
+          toast.textContent = "✅ Login Sukses! Mengalihkan ke Panel...";
+          toast.style.animation = 'none';
+          toast.offsetHeight;
+          toast.style.animation = 'fadeInOut 3.8s ease forwards';
+          
+          // Lakukan Pengalihan
+          setTimeout(function() {
+             loginOverlay.removeClass('active');
+             $('body').removeClass('modal-open');
+             
+             // CODE PENGALIHAN UTAMA: Sembunyikan Dashboard, Tampilkan Panel
+             showCrowInvisiblePanel();
+             
+          }, 1500); 
+          
+        } else {
+          // LOGIN GAGAL
+          toast.textContent = "❌ Username atau Password salah. Silakan coba lagi.";
+          toast.style.animation = 'none';
+          toast.offsetHeight;
+          toast.style.animation = 'fadeInOut 3.8s ease forwards';
+          $('#login-key').val(''); 
+        }
+      });
+      
+      // --- 4. CROW INVISIBLE PANEL LOGIC (Setelah Login) ---
+
+      function showCrowInvisiblePanel() {
+          // Sembunyikan Header dan Dashboard
+          $('#ox-header').hide();
+          $('#overload-x-main').hide();
+          
+          // Isi data panel dari USER_DATA
+          $('#panel-username-display').text(`Welcome, ${USER_DATA.username}`);
+          $('#panel-role-display').text(`${USER_DATA.username} | ${USER_DATA.role.toUpperCase()}`);
+          $('#panel-time-display').text(USER_DATA.formattedTime);
+          
+          // Tampilkan tombol Manage User jika role valid
+          if (USER_DATA.role === "admin" || USER_DATA.role === "reseller" || USER_DATA.role === "owner") {
+              $('#manage-user-btn').show();
+          } else {
+              $('#manage-user-btn').hide();
+          }
+          
+          // Tampilkan Panel
+          $('#crow-invisible-panel').css('display', 'flex'); 
+          $('body').css('overflow-y', 'auto'); 
+
+          // Reset panel state
+          $('#targetInput').val('');
+          $('.mode-btn').removeClass('selected');
+          $('#executeBtn').prop('disabled', true);
+          selectedMode = null;
+      }
+      
+      // Logout Function
+      $('#logout-btn').on('click', function(e) {
+          e.preventDefault();
+          // Sembunyikan Panel, Tampilkan Dashboard
+          $('#crow-invisible-panel').hide();
+          $('#ox-header').show();
+          $('#overload-x-main').show();
+          showPanelToast("Logout Berhasil!");
+          $('html, body').scrollTop(0); // Kembali ke atas
+      });
+
+      // Panel Logic
+      const inputField = document.getElementById('targetInput');
+      const modeButtons = document.querySelectorAll('#crow-invisible-panel .mode-btn');
+      const executeBtn = document.getElementById('executeBtn');
+      let selectedMode = null;
+      
+      function isValidNumber(number) { return /^628\d{7,13}$/.test(number); }
+
+      function updateExecuteButtonState() {
+          const number = inputField.value.trim();
+          executeBtn.disabled = !(isValidNumber(number) && selectedMode !== null);
+      }
+
+      modeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          modeButtons.forEach(btn => btn.classList.remove('selected'));
+          button.classList.add('selected');
+          selectedMode = button.getAttribute('data-mode');
+          updateExecuteButtonState();
+        });
+      });
+      
+      inputField.addEventListener('input', updateExecuteButtonState);
+
+      executeBtn.addEventListener('click', () => {
+        const number = inputField.value.trim();
+        if (!isValidNumber(number)) {
+          showPanelToast("Target tidak valid. Harus dimulai dengan 628 dan total 10-15 digit.");
+          return;
+        }
+        
+        showPanelToast(`✅ Success Sending Bug mode [${selectedMode}] ke ${number}`);
+        
+        setTimeout(() => {
+          console.log(`EXECUTION LOG: Mode: ${selectedMode}, Target: ${number}`);
+        }, 1000);
+      });
+
+      function showPanelToast(message) {
+        panelToast.innerHTML = message;
+        $(panelToast).css('display', 'block');
+        
+        requestAnimationFrame(() => {
+            panelToast.style.left = '5%'; 
+        });
+
+        setTimeout(() => {
+          panelToast.style.left = '100%'; 
+        }, 5000);
+
+        setTimeout(() => {
+          $(panelToast).css('display', 'none');
+        }, 5600);
+      }
+    });
+  </script>
+</body>
+</html>
